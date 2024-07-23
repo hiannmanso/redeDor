@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   backend:
     build:
       context: ./api
@@ -9,23 +8,19 @@ services:
     restart: always
     ports:
       - "3001:3001"
-    expose:
-      - 3001
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/db-dor
+      - DATABASE_URL=postgresql://user:B4hJDugzkzwiwf7RF2tqS52W4LqQdWs6@dpg-cqg1ip1u0jms7389kue0-a.oregon-postgres.render.com/rede_dor
       - PORT=3001
     depends_on:
       - db
 
-  front-end:
-    build: ./client
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
     restart: always
     ports:
-      - 80:80
-      - 443:443
-    expose:
-      - 80
-      - 443
+      - "5173:5173"
     depends_on:
       - backend
 
@@ -35,6 +30,6 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: db-dor
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: B4hJDugzkzwiwf7RF2tqS52W4LqQdWs6
+      POSTGRES_DB: rede_dor
